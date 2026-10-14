@@ -16,11 +16,14 @@ matters if Pages is switched to "Deploy from a branch" (it stops Jekyll from pro
 
 ```
 cd hall-eff-thr-vis
-npm install
-npm run dev      # http://localhost:5173
-npm run build    # static site in hall-eff-thr-vis/dist
-npm run preview  # serve the production build locally
+corepack enable  # or: npm install -g pnpm   (the pnpm version is pinned in package.json)
+pnpm install
+pnpm dev         # http://localhost:5173
+pnpm build       # static site in hall-eff-thr-vis/dist
+pnpm preview     # serve the production build locally
 ```
+
+This project uses [pnpm](https://pnpm.io). Commit `pnpm-lock.yaml`, and don't run `npm install` (it would create a competing `package-lock.json`).
 
 The app is a fully static site (Vite + React + three.js from npm), so it can be hosted on any free static host.
 
@@ -56,6 +59,6 @@ CI fails and `.gitignore` blocks 3D file types under `hall-eff-thr-vis/` so asse
 One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
 Optionally set a repository variable `MODEL_BASE_URL` to override the asset host.
 
-Vercel/Netlify also work with no config changes: root directory `hall-eff-thr-vis`, build command `npm run build`, output `dist`, and `VITE_MODEL_BASE_URL` as an env var.
+Vercel/Netlify also work with no config changes: root directory `hall-eff-thr-vis`, build command `pnpm build`, output `dist`, and `VITE_MODEL_BASE_URL` as an env var.
 
 `Parts In Progress/` holds the SolidWorks/CAD source files and is not used by the app.

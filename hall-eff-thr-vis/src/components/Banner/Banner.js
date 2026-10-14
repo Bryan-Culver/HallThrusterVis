@@ -3,7 +3,6 @@ import './Banner.css';
 import nasaIcon from '../../assets/images/nasaIcon.PNG';
 import psycheIcon from '../../assets/images/psycheIcon.PNG';
 
-import {Helmet} from "react-helmet";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
