@@ -7,6 +7,9 @@ import bgslide2 from "../assets/images/bgslide2.jpg"
 import Container from "react-bootstrap/Container";
 import CarouselItem from "react-bootstrap/CarouselItem";
 
+// Facts.json refers to images by source path ("../assets/images/x.jpg"); resolve them to the hashed URLs the build emits
+const images = import.meta.glob("../assets/images/*.{jpg,jpeg,png}", { eager: true, import: "default" });
+
 // This class is specific to creating the carousel elements to the facts that are shown on the page
 class DataCars extends React.Component{
     constructor(props) {
@@ -25,9 +28,8 @@ class DataCars extends React.Component{
         let json = loadData();
         const cards = [];
         let viewData = json[dataName];
-        const bgImage = viewData[0].image;
+        const bgImage = images[viewData[0].image] || viewData[0].image;
         const bgCredit = viewData[0].credit;
-        console.log(bgImage);
         viewData.forEach(function(key){
             if (key.hasOwnProperty('id')) {
                 cards.push({
@@ -45,7 +47,8 @@ class DataCars extends React.Component{
                 <Card.Img
                     variant="bottom"
                     src={bgImage}
-                    className={"w-50 h-50 mx-auto"}
+                    className={"d-block mx-auto"}
+                    style={{ maxWidth: "min(100%, 640px)", height: "auto" }}
                 />
                 <footer className="blockquote-footer text-center">
                     <small className="text-muted text-center">Image Credit: {bgCredit}</small>
@@ -60,7 +63,7 @@ class DataCars extends React.Component{
                                 {/*    className="d-block mx-auto"*/}
                                 {/*     height={250}*/}
                                 {/*/>*/}
-                                <h5 className="justify-content-center text-center textmaroon w-75 mx-auto" alt="slide">{item.body}</h5>
+                                <h5 className="justify-content-center text-center carousel-text w-75 mx-auto" alt="slide">{item.body}</h5>
 
                             </Carousel.Item>
                         ))}

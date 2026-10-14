@@ -1,0 +1,192 @@
+/*
+ * Site theme: dark, NASA-science style (black canvas, full-bleed mission imagery, white type,
+ * NASA-red accents, uppercase tracked headings). Loaded after Bootstrap; Bootstrap's dark color mode is
+ * switched on with data-bs-theme="dark" on <html>, this file layers the site-specific look on top.
+ */
+
+:root {
+  --nasa-red: #fc3d21;
+  --nasa-blue: #0b3d91;
+  --nasa-blue-light: #6c9bff;
+  --panel-bg: rgba(0, 0, 0, 0.5);        /* 50% black so the background image stays visible */
+  --panel-border: rgba(255, 255, 255, 0.18);
+  /* Remote for now (issue #24). To self-host, download the image into src/assets/images and use
+     url("./assets/images/pia24473.jpg") instead. */
+  --site-bg-image: url("https://science.nasa.gov/wp-content/uploads/2023/09/pia24473.jpg");
+}
+
+html {
+  background-color: #000;
+}
+
+body {
+  background: transparent;   /* an opaque body would cover the fixed image layer below */
+  color: #fff;
+  font-family: "Public Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Background: a fixed layer rather than background-attachment: fixed, which iOS/Android ignore. This keeps the
+   image visible on phones too. The gradient keeps text legible over the brighter parts of the picture. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.65)),
+    var(--site-bg-image) center top / cover no-repeat,
+    radial-gradient(ellipse at top right, #1b2a4a 0%, #000 70%);
+}
+
+#app,
+.App-body {
+  background: transparent;
+}
+
+a {
+  color: var(--nasa-blue-light);
+}
+
+a:hover {
+  color: #fff;
+}
+
+/* Headings: uppercase, tracked, with a short red rule like NASA section headers */
+.section-title,
+.modal-title {
+  color: #fff;
+  background: transparent;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin: 0.6rem auto 0;
+  background: var(--nasa-red);
+}
+
+/* Panels (cards) are 50% transparent black */
+.card {
+  --bs-card-bg: var(--panel-bg);
+  --bs-card-cap-bg: transparent;
+  --bs-card-border-color: var(--panel-border);
+  --bs-card-color: #fff;
+  background-color: var(--panel-bg);
+  color: #fff;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.card.border-0 {
+  border: 0 !important;
+}
+
+.card-header {
+  border-bottom: 0;
+}
+
+/* Carousel text: white, large, readable on the dark panel */
+.carousel-text,
+.carousel-item h3,
+.carousel-item h5 {
+  color: #fff;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  filter: none;           /* Bootstrap's icons are white by default; the old light theme inverted them */
+  opacity: 0.7;
+  width: 50px;
+  height: 50px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+.blockquote-footer,
+.blockquote-footer .text-muted {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.blockquote-footer {
+  margin-top: 0.5rem;   /* Bootstrap's -1rem tucks the credit line behind the photo above it */
+}
+
+/* Fact tabs: transparent bar, red underline on the active tab */
+.tab-color {
+  background: transparent;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.tab-color .nav-link,
+.tab-color .nav-link:hover,
+.tab-color .nav-link:focus {
+  color: #fff;
+  border-radius: 0;
+  background: transparent;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 3px solid transparent;
+}
+
+.tab-color .nav-link:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.tab-color .nav-link.active {
+  background: transparent;
+  border-bottom-color: var(--nasa-red);
+}
+
+/* 3D view */
+#model-container {
+  background-color: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--panel-border);
+}
+
+/* Model navigation arrows */
+.nav-arrow {
+  color: #fff;
+}
+
+.nav-arrow:hover {
+  color: var(--nasa-red);
+}
+
+/* Disclaimer modal */
+.modal-content {
+  background-color: rgba(10, 10, 10, 0.95);
+  border: 1px solid var(--panel-border);
+  color: #fff;
+}
+
+.modal-header,
+.modal-footer {
+  border-color: var(--panel-border);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--nasa-red);
+  --bs-btn-border-color: var(--nasa-red);
+  --bs-btn-hover-bg: #d9341b;
+  --bs-btn-hover-border-color: #d9341b;
+  --bs-btn-active-bg: #b52b16;
+  --bs-btn-active-border-color: #b52b16;
+  --bs-btn-disabled-bg: var(--nasa-red);
+  --bs-btn-disabled-border-color: var(--nasa-red);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
