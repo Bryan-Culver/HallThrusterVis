@@ -52,7 +52,7 @@ class DataCars extends React.Component{
                 </footer>
 
                 <Card.Body>
-                    <Carousel indicators={false} interval={8000}>
+                    <Carousel indicators={false} interval={8000} className="uniform-carousel">
                         {/* iterates through map to create a new carousel item with facts to display*/}
                         {cards.map((item, ind) => (
                             <Carousel.Item key={ind}>

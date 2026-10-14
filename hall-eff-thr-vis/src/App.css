@@ -117,3 +117,29 @@
   margin-left: -3px;
   top: 0;
 }
+
+/* Uniform-height carousels (#23): every slide shares one grid cell, so the carousel is as tall as its
+   longest slide and never resizes between slides. Slide text is centered horizontally and vertically. */
+.uniform-carousel .carousel-inner {
+  display: grid;
+}
+
+.uniform-carousel .carousel-item {
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: none;
+  margin-right: 0;
+  visibility: hidden;
+}
+
+.uniform-carousel .carousel-item.active,
+.uniform-carousel .carousel-item-next,
+.uniform-carousel .carousel-item-prev {
+  visibility: visible;
+}
+
+.uniform-carousel .carousel-item > * {
+  margin-bottom: 0;
+}

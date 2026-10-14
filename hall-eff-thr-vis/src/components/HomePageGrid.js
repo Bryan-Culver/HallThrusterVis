@@ -94,7 +94,7 @@ class HomePageGrid extends React.Component{
                             <h2 className={"body-text border-0"} align={"center"}> {this.props.viewId} </h2>
                         </Card.Header>
                         <Card.Body>
-                            <Carousel indicators={false} className={"justify-content-center"}>
+                            <Carousel indicators={false} className={"justify-content-center uniform-carousel"}>
                                 {/* iterates through map to create a new carousel item with facts to display*/}
                                     {carItems.map((item, ind) => (
                                         <Carousel.Item key={ind}>
