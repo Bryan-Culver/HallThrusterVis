@@ -76,8 +76,11 @@
   background: linear-gradient(to right, #302144, #592651 33%, #A53F5B 66%, #EF5966);
 }
 
-.nav-link{
-  color:white;
+/* Bootstrap 5 sets its own .nav-link color and is loaded after this file, so scope the rule to beat it */
+.tab-color .nav-link,
+.tab-color .nav-link:hover,
+.tab-color .nav-link:focus {
+  color: white;
 }
 
 .carousel-control-prev, .carousel-control-next{
