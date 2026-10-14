@@ -26,7 +26,7 @@ class GeneralInfo extends React.Component{
                             <a className="genInfo">
                                 <span></span>
                             </a>
-                            <Carousel indicators={false}>
+                            <Carousel indicators={false} className="uniform-carousel">
                                 <Carousel.Item>
                                     <h3 className="text-center w-75 mx-auto"> For the first time ever we are exploring a world made not of rock or ice, but of metal.</h3>
                                 </Carousel.Item>
