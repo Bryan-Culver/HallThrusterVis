@@ -60,7 +60,7 @@ class HomePageGrid extends React.Component{
 
         return (
 
-            <Container fluid={true} className={"App-body Orbiter-Image"}>
+            <Container fluid={true} className={"App-body"}>
 
                 {/* row containing entirety of app */}
                 <Row className={"my-5"}>
@@ -91,7 +91,7 @@ class HomePageGrid extends React.Component{
                 <Container fluid={true} className={"App-body justify-content-centered my-5"}>
                     <Card className={"border-0 my-5"}>
                         <Card.Header className={"border-0"}>
-                            <h2 className={"body-text border-0"} align={"center"}> {this.props.viewId} </h2>
+                            <h2 className={"section-title border-0"} align={"center"}> {this.props.viewId} </h2>
                         </Card.Header>
                         <Card.Body>
                             <Carousel indicators={false} className={"justify-content-center uniform-carousel"}>
@@ -102,7 +102,7 @@ class HomePageGrid extends React.Component{
                                             {/*    className={"d-block mx-auto"}*/}
                                             {/*    height={250}*/}
                                             {/*/>*/}
-                                            <h5 className="d-block justify-content-center text-center textmaroon w-75 mx-auto" alt="slide">{item.body}</h5>
+                                            <h5 className="d-block justify-content-center text-center carousel-text w-75 mx-auto" alt="slide">{item.body}</h5>
                                         </Carousel.Item>
                                     ))}
                             </Carousel>

@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
-import './InfoCard.css';
 
 class InfoCard extends React.Component {
     constructor(props) {

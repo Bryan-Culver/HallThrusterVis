@@ -2,21 +2,6 @@
   text-align: center;
 }
 
-.Orbiter-Image {
-  background-image: url("./assets/images/orbiter.png");
-  background-position: right;
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position-y: -120px;
-  background-position-x: 700px;
-}
-
-.body-text {
-  color: darkred;
-  font-size: 26px;
-  background-color: white;
-}
-
 .App-header {
   min-height: 100vh;
   display: flex;
@@ -47,11 +32,6 @@
   font-size: 26px;
 }
 
-.App-body {
-  background-color: snow;
-  font-size: medium;
-}
-
 .hidden {
   visibility: hidden;
 }
@@ -80,14 +60,6 @@
   color:white;
 }
 
-.carousel-control-prev, .carousel-control-next{
-  filter: invert(1);
-  color: #6F0752;
-  opacity: .7;
-  width: 50px;
-  height: 50px;
-}
-
 .centered {
   position: absolute;
   top: 50%;
@@ -100,14 +72,6 @@
 }
 
 
-
-.textmaroon {
-  color: maroon;
-}
-
-.whitebg {
-  background-color: white;
-}
 
 .vertLine {
   border-left: 6px #A53F5B;
