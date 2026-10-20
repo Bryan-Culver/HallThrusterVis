@@ -23,6 +23,14 @@ pnpm build       # static site in hall-eff-thr-vis/dist
 pnpm preview     # serve the production build locally
 ```
 
+Before merging an upgrade (or any change), run the same checks CI runs on every pull request:
+
+```
+pnpm build && pnpm smoke   # smoke = loads the built app in headless Chromium and fails on runtime errors
+```
+
+The **PR build check** workflow (`.github/workflows/ci.yml`) does this automatically for every pull request, including Dependabot's, so a red check on a Dependabot PR means that upgrade breaks the build or the app.
+
 This project uses [pnpm](https://pnpm.io). Commit `pnpm-lock.yaml`, and don't run `npm install` (it would create a competing `package-lock.json`).
 
 The app is a fully static site (Vite + React + three.js from npm), so it can be hosted on any free static host.
