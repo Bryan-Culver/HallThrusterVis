@@ -45,7 +45,7 @@ class FactCards extends React.Component{
 
      return(
          <React.Fragment>
-             <Container fluid>
+             <Container fluid className={"facts-section"}>
                  <Tab.Container id="facts" defaultActiveKey={0} onSelect={key => this.setState({key})}>
                      <Card className={"border-0"}>
                          <Card.Header className={"border-0"}>
