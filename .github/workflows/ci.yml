@@ -1,0 +1,49 @@
+name: PR build check
+
+# Runs on every pull request (including Dependabot's) so upgrade problems show up before merging:
+# a clean frozen-lockfile install, a production build, and a headless-browser smoke test of the built app.
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hall-eff-thr-vis
+    steps:
+      - uses: actions/checkout@v7
+      - name: Fail if 3D assets are committed to the app
+        working-directory: .
+        run: |
+          if git ls-files 'hall-eff-thr-vis/*' | grep -iE '\.(obj|mtl|glb|gltf|stl|fbx)$'; then
+            echo "3D assets must be hosted externally (see README)"; exit 1
+          fi
+      # pnpm version comes from "packageManager" in hall-eff-thr-vis/package.json
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: hall-eff-thr-vis/package.json
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: hall-eff-thr-vis/pnpm-lock.yaml
+      - name: Install (fails if package.json and pnpm-lock.yaml disagree)
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm run build
+      - name: Install headless Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Smoke test the built app
+        run: pnpm run smoke
+      - name: Dependency audit (informational)
+        continue-on-error: true
+        run: pnpm audit --prod
