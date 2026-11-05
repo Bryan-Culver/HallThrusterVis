@@ -30,16 +30,11 @@ class HomePageGrid extends React.Component{
         const loadOrder = () => JSON.parse(JSON.stringify(listing));
         let order = loadOrder();
 
-        let next = "";
-        let prev = "";
-        for(let idx in order) {
-            if (order.hasOwnProperty(idx)) {
-                if (idx === viewId) {
-                    next = order[idx]["next"];
-                    prev = order[idx]["prev"];
-                }
-            }
-        }
+        // arrows loop: after the last part comes the first, and before the first comes the last
+        const ids = Object.keys(order);
+        const at = ids.indexOf(viewId);
+        const next = ids[(at + 1) % ids.length];
+        const prev = ids[(at - 1 + ids.length) % ids.length];
 
         // read json data for cards
         const loadData = () => JSON.parse(JSON.stringify(jsonData));
@@ -71,19 +66,19 @@ class HomePageGrid extends React.Component{
                     </Col>
                 </Row>
 
-                <Row>
-                    <Col xs={2} md={1} id={"back-nav-arrow"} className={"align-self-center"}>
-                        { prev === "" ? null : <BackwardNav prev={prev} arrowClick={this.changeView.bind(this)}/> }
-                    </Col>
-
-                    <Col xs={8} md={10} id={"model-view"} className={"align-self-center"}>
-                        <Model viewId={viewId}/>
-                    </Col>
-
-                    <Col xs={2} md={1} id={"forward-nav-arrow"} className={"align-self-center"}>
-                        { next === "" ? null : <ForwardNav next={next} arrowClick={this.changeView.bind(this)}/> }
-                    </Col>
-                </Row>
+                <div className={"viewer-section"}>
+                    <div className={"viewer-stage"}>
+                        <div id={"back-nav-arrow"} className={"viewer-arrow viewer-arrow-prev"}>
+                            <BackwardNav prev={prev} arrowClick={this.changeView.bind(this)}/>
+                        </div>
+                        <div id={"model-view"} className={"viewer-model"}>
+                            <Model viewId={viewId}/>
+                        </div>
+                        <div id={"forward-nav-arrow"} className={"viewer-arrow viewer-arrow-next"}>
+                            <ForwardNav next={next} arrowClick={this.changeView.bind(this)}/>
+                        </div>
+                    </div>
+                </div>
 
                     {/*</Col>*/}
                 {/*</Row>*/}

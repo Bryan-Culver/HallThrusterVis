@@ -13,3 +13,71 @@
     background-color: darkgray;
 }
 
+
+/* 3D viewer (#25). Mobile: full-bleed, arrows overlap the model. Tablet/desktop: a square model with the
+   arrows in the gutters beside it, as large as fits in the viewport. */
+.viewer-section {
+    /* cancel the fluid container's side padding so the model can reach the screen edge */
+    margin: 0 calc(var(--bs-gutter-x, 1.5rem) * -0.5);
+}
+
+.viewer-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.viewer-model {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.viewer-model #model-container {
+    border-left: 0;
+    border-right: 0;
+}
+
+.viewer-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    line-height: 0;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 50%;
+}
+
+.viewer-arrow-prev { left: 8px; }
+.viewer-arrow-next { right: 8px; }
+
+@media (min-width: 768px) {
+    .viewer-model {
+        width: min(100%, calc(100vh - 160px), 900px);
+        min-width: 360px;
+    }
+
+    .viewer-arrow {
+        position: static;
+        transform: none;
+        background: none;
+        flex: 0 0 auto;
+        padding: 0 0.5rem;
+    }
+
+    .viewer-arrow-prev { order: 0; }
+    .viewer-model { order: 1; }
+    .viewer-arrow-next { order: 2; }
+
+    .viewer-model #model-container {
+        border: 1px solid var(--panel-border);
+    }
+}
+
+/* Clear separation between the viewer and the 4-part information section */
+.facts-section {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 2px solid var(--nasa-red);
+    box-shadow: 0 -18px 30px -24px rgba(252, 61, 33, 0.5);
+}
